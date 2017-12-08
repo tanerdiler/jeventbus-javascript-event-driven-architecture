@@ -1,3 +1,5 @@
+*lock.json
+*.iml
 # Logs
 logs
 *.log
