@@ -19,7 +19,7 @@ $ npm install --save eventbus
 
 
 ```javascript
-var eventbus = require('eventbus');
+var eventbus = require('the.eventbus');
 
 var MyListener = function()
 {
@@ -30,7 +30,7 @@ var MyListener = function()
 }
 
 eventbus.event('onClick');
-eventbus.listener(new MyListener).listen('onClick');
+eventbus.listener(new MyListener()).listen('onClick');
 eventbus.event('onClick').fire({firstname:'taner'});
 
 ```
