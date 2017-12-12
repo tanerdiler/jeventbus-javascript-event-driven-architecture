@@ -5,10 +5,30 @@ var types = require('the.types');
 
 var TheEvent = function (_name) {
 
+    var _defaultMethodName = _name;
+
+    var nameIncludes_On_Prefix = function () {
+        return _name.indexOf("on") === 0;
+    }
+
+    if (absent.not(nameIncludes_On_Prefix())) {
+        _defaultMethodName = "on" + _name;
+    }
+
     var listeners = types.array();
 
     this.name = function () {
         return _name;
+    }
+
+    this.method = function()
+    {
+        return _defaultMethodName;
+    }
+
+    this.setDefaultMethod = function(methodName)
+    {
+        _defaultMethodName = methodName;
     }
 
     this.fire = function (source) {
@@ -36,13 +56,13 @@ var TheEvents = types.map();
 
 var TheListener = function (object) {
     var self = this;
-    var eventName = null;
+    var methodName = null;
 
     var conditionToTriggerListener = null;
 
     this.listen = function (eventNameParameter) {
-        eventName = eventNameParameter;
-        var event = TheEvents.get(eventName);
+        var event = TheEvents.get(eventNameParameter);
+        methodName = event.method();
         event.addListener(self);
         return self;
     }
@@ -60,20 +80,12 @@ var TheListener = function (object) {
     }
 
     this.trigger = function (source) {
-        return object[eventName](source);
+        return object[methodName](source);
     }
 }
 
 module.exports = {
     event : function (name) {
-
-        var nameIncludes_On_Prefix = function () {
-            return name.indexOf("on") === 0;
-        }
-
-        if (absent.not(nameIncludes_On_Prefix())) {
-            name = "on" + name;
-        }
 
         var event = TheEvents.get(name);
 
