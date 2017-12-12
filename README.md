@@ -38,10 +38,10 @@ eventbus.event('onClick').fire({firstname:'taner'});
 ## Versions
 ### 1.0.2
 #### Added
-..* Specifiying default method that would be triggered when event fired
-..* Unless default method is specified, event name will be assigned as default method by putting on prefix if needed.
+- Specifiying default method that would be triggered when event fired
+- Event name will be assigned as default method by putting on prefix if needed, if method name is not specified.
 #### Removed
-..* Automatically putting 'on' prefix to event name  while creating an event
+- Automatically putting 'on' prefix to event name  while creating an event
 
 ## Test
 
