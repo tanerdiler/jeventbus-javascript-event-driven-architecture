@@ -5,6 +5,12 @@ chai.should();
 var eventbus = require('./eventbus');
 describe('Eventbus lets you execute your business logic by providing sequential event/listener approach',function(){
 
+    it("should not put 'on' prefix to event name if not exist",function(){
+        var event = eventbus.event("MouseClick");
+        event.name().should.equal("MouseClick");
+    })
+
+
     it('should create an event once',function(){
         var event_1 = eventbus.event('onMouseClick');
         var event_2 = eventbus.event('onMouseClick');
@@ -66,11 +72,9 @@ describe('Eventbus lets you execute your business logic by providing sequential 
     })
 
     it('event name should be assigned to method name with putting on prefix if needed, by default ', function(){
-        var listenerCallingTimes = 0;
         eventbus.event('BadWordRemoved');
-        eventbus.listener({onBadWordRemoved:function(source){listenerCallingTimes++;}}).listen('BadWordRemoved');
-        eventbus.event('BadWordRemoved').fire({badword:'nothing'});
-        listenerCallingTimes.should.equal(1);
+        var methodName = eventbus.event('BadWordRemoved').method();
+        methodName.should.equal('onBadWordRemoved');
     })
 
 });
