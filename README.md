@@ -56,9 +56,18 @@ eventbus.listener(StockManager).withMethod('decStock').listen('OrderReady');
 
 eventbus.event('OrderReady').fire({food:'Pizza', amount: 5});
 
+
+var listener = eventbus.listener(CustomListener).
+            withMethod('doSomething').
+            listen('SomethingHappened').
+            desc('When something is happened, CustomListener writes some info to console.');
+
 ```
 
 ## Versions
+### 1.0.4
+#### Added
+- Developer can write a short desc about event&listener conf.
 ### 1.0.3
 #### Added
 - Calling method named different than default method of event. With this feature, you can give meaningful name to method.

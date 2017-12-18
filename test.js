@@ -88,4 +88,17 @@ describe('Eventbus lets you execute your business logic by providing sequential 
         stock.should.equal(95);
     })
 
+    it('Developer can write a short desc in order to get quick info when look at code after a long time', function(){
+        var CustomListener = { doSomething: function(){}};
+
+        eventbus.event('SomethingHappened').setDefaultMethod('onHappen');
+
+        var listener = eventbus.listener(CustomListener).
+            withMethod('doSomething').
+            listen('SomethingHappened').
+            desc('When something is happened, CustomListener writes some info to console.');
+
+        listener.getDesc().should.equals('When something is happened, CustomListener writes some info to console.');
+    })
+
 });
