@@ -36,9 +36,24 @@ eventbus.event('onClick').fire({firstname:'taner'});
 
 var mailSent = false;
 var stock = 100;
+
+var OrderMailSender = {
+	sendAnEmail : function(source){
+		mailSent = true;
+        }
+}
+
+var StockManager = {
+	decStock : function(source){
+		stock = stock - source.amount;
+	}
+}
+
 eventbus.event('OrderReady').setDefaultMethod('onOrderDone');
-eventbus.listener({sendAnEmail:function(source){mailSent = true;}}).withMethod('sendAnEmail').listen('OrderReady');
-eventbus.listener({decStock:function(source){stock = stock - source.amount;}}).withMethod('decStock').listen('OrderReady');
+
+eventbus.listener(OrderMailSender).withMethod('sendAnEmail').listen('OrderReady');
+eventbus.listener(StockManager).withMethod('decStock').listen('OrderReady');
+
 eventbus.event('OrderReady').fire({food:'Pizza', amount: 5});
 
 ```
