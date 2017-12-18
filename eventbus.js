@@ -57,8 +57,19 @@ var TheEvents = types.map();
 var TheListener = function (object) {
     var self = this;
     var methodName = null;
+    var desc = null;
 
     var conditionToTriggerListener = null;
+
+    this.desc = function(descText)
+    {
+        desc = descText;
+        return self;
+    }
+
+    this.getDesc = function(){
+        return desc;
+    }
 
     this.withMethod = function(_methodName)
     {
