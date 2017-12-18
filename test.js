@@ -71,10 +71,21 @@ describe('Eventbus lets you execute your business logic by providing sequential 
         listenerCallingTimes.should.equal(1);
     })
 
-    it('event name should be assigned to method name with putting on prefix if needed, by default ', function(){
+    it('event name with putting on prefix if needed should be assigned as method name, by default ', function(){
         eventbus.event('BadWordRemoved');
         var methodName = eventbus.event('BadWordRemoved').method();
         methodName.should.equal('onBadWordRemoved');
+    })
+
+    it('Listener can have method named different than default method of event',function(){
+        var mailSent = false;
+        var stock = 100;
+        eventbus.event('OrderReady').setDefaultMethod('onOrderDone');
+        eventbus.listener({sendAnEmail:function(source){mailSent = true;}}).withMethod('sendAnEmail').listen('OrderReady');
+        eventbus.listener({decStock:function(source){stock = stock - source.amount;}}).withMethod('decStock').listen('OrderReady');
+        eventbus.event('OrderReady').fire({food:'Pizza', amount: 5});
+        mailSent.should.equal(true);
+        stock.should.equal(95);
     })
 
 });
