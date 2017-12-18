@@ -1,6 +1,6 @@
 {
   "name": "the.eventbus",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Eventbus let you design your code on event/listener approach. Eventbus executes listeners sequential when an event is fired. I had implemented this approach on refactoring a hude javascript method. This approach allows you to implement business logic by creating listeners with less code and single responsbility. It allows you to add/remove changes or features with less effort.",
   "main": "eventbus.js",
   "scripts": {

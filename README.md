@@ -33,9 +33,20 @@ eventbus.event('onClick');
 eventbus.listener(new MyListener()).listen('onClick');
 eventbus.event('onClick').fire({firstname:'taner'});
 
+
+var mailSent = false;
+var stock = 100;
+eventbus.event('OrderReady').setDefaultMethod('onOrderDone');
+eventbus.listener({sendAnEmail:function(source){mailSent = true;}}).withMethod('sendAnEmail').listen('OrderReady');
+eventbus.listener({decStock:function(source){stock = stock - source.amount;}}).withMethod('decStock').listen('OrderReady');
+eventbus.event('OrderReady').fire({food:'Pizza', amount: 5});
+
 ```
 
 ## Versions
+### 1.0.3
+#### Added
+- Calling method named different than default method of event. With this feature, you can give meaningful name to method.
 ### 1.0.2
 #### Added
 - Specifiying default method that would be triggered when event fired
