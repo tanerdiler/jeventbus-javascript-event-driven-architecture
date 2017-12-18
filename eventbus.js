@@ -60,9 +60,18 @@ var TheListener = function (object) {
 
     var conditionToTriggerListener = null;
 
+    this.withMethod = function(_methodName)
+    {
+        methodName = _methodName;
+        return self;
+    }
+
     this.listen = function (eventNameParameter) {
         var event = TheEvents.get(eventNameParameter);
-        methodName = event.method();
+        if(absent.isNull(methodName))
+        {
+            methodName = event.method();
+        }
         event.addListener(self);
         return self;
     }
