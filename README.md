@@ -1,9 +1,9 @@
-# eventbus
+# JEventbus Javascript NPM Package - Event Driven Architecture
 
 [![Build Status](https://travis-ci.org/tanerdiler/eventbus.js.svg?branch=master)](https://travis-ci.org/tanerdiler/eventbus.js)
 [![Coverage Status](https://coveralls.io/repos/github/tanerdiler/eventbus.js/badge.svg?branch=master)](https://coveralls.io/github/tanerdiler/eventbus.js?branch=master)
 
-eventbus is a sequential event/listener mechanism.
+eventbus is a sequential event/listener mechanism that based on Event Driven Architecture.
 
 ## What is the goal of this project?
 
